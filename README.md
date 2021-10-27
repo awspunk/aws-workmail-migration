@@ -1,5 +1,5 @@
 # WMigrate
-A tool for migrating ( creates new ) AWS Workmail Users ( along with aliases ) , groups ( along with aliases ) and group members cross region and cross account.
+A tool for migrating AWS Workmail Users and Groups cross region and cross accounts. It also creates user and group aliases and adds the users to correspoding groups based on the source.
 
 ### Current Limitation
 - Only creates "ENABLED" Users and Groups
@@ -13,8 +13,10 @@ A tool for migrating ( creates new ) AWS Workmail Users ( along with aliases ) ,
 ### Usage
 
 ```
-python3 WMigrate.py --orgOld m-6xyz --orgNew m-9xyz --profileSource $profileSource --aliasDest $profileDest --regionOld us-east-1 --regionNew us-west-2
+python3 WMigrate.py --orgOld m-6xyz --orgNew m-9xyz --profileSource $profileSource --profileDest $profileDest --regionOld us-east-1 --regionNew us-west-2
 ```
+- orgOld - The source's organization Id
+- orgNew - The destination's organization Id
 - profileSource : Name of the profile for the source aws account in $HOME/.aws/credentials
 - profileDest : Name of the profile for the destination aws account in $HOME/.aws/credentials
 ( If cross region in same account , profileSource and profileDest will be same )
@@ -24,9 +26,12 @@ python3 WMigrate.py --orgOld m-6xyz --orgNew m-9xyz --profileSource $profileSour
 
 ### Assumptions
 
+- The script assumes you've set up an organization on the Destination account/region
+- The profiles provided have the necessary permissions 
 - The script assumes you've enabled all the users and groups that needs to be migrated
-- The script assumes you're migrating across same Domain Names ( user@xyz.com )
+- The script assumes you're migrating across same Domain Names 
 
 ### Further Improvments 
 - Progress Bar
 - Cross Domain Migration
+- Migration from other E-mail providers
